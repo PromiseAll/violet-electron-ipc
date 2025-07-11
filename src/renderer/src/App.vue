@@ -10,6 +10,7 @@ onMounted(() => {
     flag.value = false;
   }, 10000);
   setInterval(() => {
+    console.log('send startle  hello' );
     window.api.message.shy.startle('hello');
   }, 2000);
 });

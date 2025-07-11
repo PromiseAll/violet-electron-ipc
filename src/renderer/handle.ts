@@ -15,6 +15,7 @@ const handle: ProxyHandler<ApiLike> = {
       // @ts-ignore
       return window.electron.ipcRenderer.invoke(target.parent, ...argumentsList);
     }
+    return null;
   }
 };
 const api = new Proxy(async function () {}, handle);

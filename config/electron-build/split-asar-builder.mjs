@@ -1,5 +1,5 @@
 import { createRequire } from 'node:module';
-import pkg from '../../package.json' assert { type: 'json' };
+import pkg from '../../package.json' with { type: 'json' };
 import yml from 'js-yaml';
 import path from 'path';
 import fs from 'fs';
@@ -47,7 +47,7 @@ async function doBuild(root, options) {
   root = root ?? process.cwd();
 
   const { Packager, Platform } = require('app-builder-lib');
-  const { getConfig, validateConfig } = require('app-builder-lib/out/util/config');
+  const { getConfig, validateConfiguration } = require('app-builder-lib/out/util/config/config.js');
   const { createElectronFrameworkSupport } = require('app-builder-lib/out/electron/ElectronFramework.js');
 
   let platform = Platform.current();
@@ -86,7 +86,7 @@ async function doBuild(root, options) {
     afterSign: path.join(root, 'config', 'electron-build', 'split-asar-builder-handle.cjs')
   });
   const packager = new Packager(buildOptions);
-  validateConfig(buildOptions.config, packager.debugLogger);
+  validateConfiguration(buildOptions.config, packager.debugLogger);
   const framework = await createElectronFrameworkSupport(buildOptions.config, packager);
   Reflect.set(packager, '_framework', framework);
   await packager.build();

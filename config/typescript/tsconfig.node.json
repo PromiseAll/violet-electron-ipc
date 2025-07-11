@@ -7,6 +7,7 @@
     "../../src/main/**/*",
     "../../src/preload/**/*",
   ],
+  
   "compilerOptions": {
     "composite": true,
     "types": [
