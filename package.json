@@ -58,6 +58,7 @@
     "eslint-plugin-vue": "^10.3.0",
     "js-yaml": "^4.1.0",
     "lint-staged": "^16.1.2",
+    "picocolors": "^1.1.1",
     "prettier": "^3.6.2",
     "simple-git-hooks": "^2.13.0",
     "typescript": "^5.8.3",
