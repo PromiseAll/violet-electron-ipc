@@ -32,3 +32,34 @@ if (!String.prototype.format) {
     });
   };
 }
+
+if (!String.rawEx) {
+  // @ts-ignore
+  String.rawEx = function (callSite: TemplateStringsArray, ...substitutions: any[]) {
+    const rawString = String.raw(callSite, ...substitutions);
+    const lines = rawString.split(/\r?\n/);
+    if (lines.length > 1) {
+      if (lines[0] === '') {
+        lines.shift();
+      }
+      if (lines[lines.length - 1] === '') {
+        lines.pop();
+      }
+    }
+
+    let minSpaceCount = Number.MAX_SAFE_INTEGER;
+    for (const line of lines) {
+      if (/^\s.*$/.test(line)) {
+        const currCount = line.length - line.replace(/^\s+/, '').length;
+        if (currCount < minSpaceCount && currCount > 0) {
+          minSpaceCount = currCount;
+        }
+      }
+    }
+    const spaceRegex = new RegExp(`^\\s{${minSpaceCount}}`);
+    for (let i = 0; i < lines.length; i++) {
+      lines[i] = lines[i].replace(spaceRegex, '');
+    }
+    return lines.join('\n');
+  };
+}

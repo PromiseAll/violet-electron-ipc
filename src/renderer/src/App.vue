@@ -12,6 +12,7 @@ onMounted(() => {
   setInterval(() => {
     console.log('send startle  hello' );
     window.api.message.shy.startle('hello');
+    window.api.message.shy.asyncStartle('hello')
   }, 2000);
 });
 </script>
